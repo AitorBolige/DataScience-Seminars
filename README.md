@@ -30,25 +30,24 @@ The pipeline works as follows:
 
 ```
 .
-├── data/                      Raw and processed datasets (.mat, .pkl)
-├── models/                    Trained model files (model.1 ... model.5)
+├── data/                       Raw and processed datasets (.mat, .pkl)
+├── models/
+│   ├── model.1 ... model.5     Trained model files
+│   ├── best_model_binary_classification_Extra Trees_China_Teknon.pkl
+│   └── best_model_three_class_classification_SVM (RBF)_China_Teknon.pkl
 ├── notebooks/
-│   ├── project_code.ipynb         Main analysis and modeling notebook
-│   ├── training_evaluation.ipynb  Training and evaluation of the final models
-│   └── qrs_signals_function/      Per patient QRS signal arrays (.npy)
-├── best_model_binary_classification_Extra Trees_China_Teknon.pkl
-├── best_model_three_class_classification_SVM (RBF)_China_Teknon.pkl
-├── output/                        Generated figures and result plots
-├── soo_standarization/            Standardized Site of Origin (SOO) tables (.csv)
-├── requirements.txt               Python dependencies
+│   ├── project_code.ipynb      Main analysis and modeling notebook
+│   └── qrs_signals_function/   Per patient QRS signal arrays (.npy)
+├── output/                     Generated figures and result plots
+├── soo_standarization/         Standardized Site of Origin (SOO) tables (.csv)
+├── requirements.txt            Python dependencies
 └── README.md
 ```
 
-The two `best_model_*.pkl` files at the repository root are the final fitted
+The two `best_model_*.pkl` files inside `models/` are the final fitted
 classifiers, one for the binary task (Extra Trees) and one for the three class
-task (SVM RBF), both trained on the China and Teknon combination. They are saved
-by `notebooks/training_evaluation.ipynb` and can be loaded directly with
-`pickle` to run predictions without retraining.
+task (SVM RBF), both trained on the China and Teknon combination. They can be
+loaded directly with `pickle` to run predictions without retraining.
 
 ## Requirements
 
@@ -77,20 +76,17 @@ conda activate soo
 pip install -r requirements.txt
 # plus the course provided 'sak' library (see note above)
 
-# 4a. Reproduce everything by running the notebooks top to bottom
+# 4a. Reproduce everything by running the notebook top to bottom
 jupyter nbconvert --to notebook --execute --inplace notebooks/project_code.ipynb
-jupyter nbconvert --to notebook --execute --inplace notebooks/training_evaluation.ipynb
 
-# 4b. Or open them interactively and run all cells in order
+# 4b. Or open it interactively and run all cells in order
 jupyter notebook notebooks/project_code.ipynb
-jupyter notebook notebooks/training_evaluation.ipynb
 ```
 
-`project_code.ipynb` covers the full analysis and regenerates the metrics
-reported below and the figures in `output/`. `training_evaluation.ipynb` trains
-the final classifiers and writes the two `best_model_*.pkl` files. The `data/`
-directory must be present alongside the notebooks (it is included in this
-repository).
+`project_code.ipynb` covers the full analysis, trains the final classifiers,
+regenerates the metrics reported below, and saves the figures in `output/` and
+the `best_model_*.pkl` files in `models/`. The `data/` directory must be present
+alongside the notebook (it is included in this repository).
 
 ## Results
 
